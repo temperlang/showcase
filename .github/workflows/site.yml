@@ -1,0 +1,46 @@
+# Untested: publishes this folder as is to GitHub Pages, as Hrefine's
+# site.yml does after its build.
+name: site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Only the page's own files, not the repo's docs and workflows.
+      - name: Collect
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          cp index.html style.css app.js libraries.js "$RUNNER_TEMP/site/"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+
+  # Publishes only from main. Needs Settings > Pages > Source: GitHub Actions.
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

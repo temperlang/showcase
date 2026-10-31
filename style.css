@@ -1,0 +1,411 @@
+/* The Temper libraries page. Colors are tokens, redefined for dark mode, in
+   the style of the libraries' own sites. */
+
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --text: #17202b;
+  --muted: #535e6b;
+  --border: #dde2e8;
+  --accent: #1f5fbf;
+  --focus: #1f5fbf;
+  --chip: #eef1f5;
+  /* Art: lightness and chroma of the Chromarite band, Hrefine's parts. */
+  --band-l: 86%;
+  --band-c: 0.09;
+  --scheme: #8a2be2;
+  --host: #1d5fa8;
+  --port: #b0461a;
+  --path: #0f7a4a;
+  --query: #a0337a;
+  --fragment: #7a6200;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1217;
+    --surface: #161b22;
+    --text: #e6ebf1;
+    --muted: #a3adb9;
+    --border: #2a323d;
+    --accent: #85b2fb;
+    --focus: #85b2fb;
+    --chip: #202731;
+    --band-l: 40%;
+    --band-c: 0.065;
+    --scheme: #c9a0ff;
+    --host: #8cc4ff;
+    --port: #f0a274;
+    --path: #7fd4a4;
+    --query: #f29ccf;
+    --fragment: #e6cc6a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.wrap {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding-inline: 1.25rem;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Header */
+
+.hero {
+  padding-block: 3.5rem 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  max-width: 38rem;
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* The list: one row each, all as tall as the tallest. */
+
+.libraries {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lib {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24rem;
+  align-items: center;
+  min-height: 8.5rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.15s;
+}
+
+.lib:hover,
+.lib:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+.body {
+  grid-row: 1;
+  padding: 1.1rem 1.4rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.25;
+}
+
+.status {
+  display: inline-block;
+  margin-left: 0.3rem;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  vertical-align: 0.2em;
+}
+
+.phrase {
+  margin: 0.3rem 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.45;
+}
+
+.links {
+  display: flex;
+  gap: 1.1rem;
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+/* Art fills the right column and fades in from the text's side. */
+
+.art {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -2rem;
+  padding-left: 2rem;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4.5rem);
+  mask-image: linear-gradient(to right, transparent, #000 4.5rem);
+}
+
+.mono,
+.url,
+.md .src,
+.labels {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Chromarite: a band through OkLCh hues at even lightness, with sRGB stops
+   for browsers without gradient interpolation in a color space. */
+
+.art-gradient {
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--surface) 35%, transparent), transparent 55%),
+    linear-gradient(90deg, #f5c6c6, #f0dcb0, #c9e8c0, #b8e3e6, #c4cff5, #e2c6f0, #f5c6c6);
+}
+
+@supports (background: linear-gradient(in oklch, red, blue)) {
+  .art-gradient {
+    background:
+      linear-gradient(to bottom, color-mix(in oklab, var(--surface) 35%, transparent), transparent 55%),
+      linear-gradient(90deg in oklch longer hue, oklch(var(--band-l) var(--band-c) 20), oklch(var(--band-l) var(--band-c) 20));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .art-gradient {
+    background:
+      linear-gradient(90deg, #5a3a3e, #56492f, #3a5236, #2f5054, #39436a, #523a5e, #5a3a3e);
+  }
+
+  @supports (background: linear-gradient(in oklch, red, blue)) {
+    .art-gradient {
+      background: linear-gradient(90deg in oklch longer hue, oklch(var(--band-l) var(--band-c) 20), oklch(var(--band-l) var(--band-c) 20));
+    }
+  }
+}
+
+/* Hrefine: a URL split into its parts, each tinted and named below. */
+
+.url {
+  display: flex;
+  font-size: 0.86rem;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.url .part {
+  margin-inline: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.url .text {
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid currentColor;
+}
+
+.url .name {
+  margin-top: 0.2rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.url .sep {
+  color: var(--muted);
+}
+
+.url .scheme { color: var(--scheme); }
+.url .host { color: var(--host); }
+.url .port { color: var(--port); }
+.url .path { color: var(--path); }
+.url .query { color: var(--query); }
+.url .fragment { color: var(--fragment); }
+
+/* Kelpto: Markdown source that fades into its rendered text. */
+
+.md {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  line-height: 1.4;
+}
+
+.md .src {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+.md .out {
+  display: flex;
+  flex-direction: column;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92rem;
+}
+
+.md .out .h {
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.md::before {
+  /* An arrow-ish fade between the two. */
+  content: "";
+  order: 1;
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--muted));
+}
+
+.md .out {
+  order: 2;
+}
+
+/* Ordable: labels in smart order, as chips. */
+
+.art-labels {
+  justify-content: flex-start;
+  /* The strip runs on past the edge, so fade both ends. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4.5rem, #000 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 4.5rem, #000 80%, transparent);
+}
+
+.labels {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+}
+
+.labels li {
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--chip);
+  color: var(--muted);
+}
+
+.labels li:nth-child(4) {
+  /* file10, after file9: the one plain sorting gets wrong. */
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  color: var(--text);
+}
+
+/* Footer */
+
+footer {
+  padding-block: 2rem 3rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.plain {
+  padding-left: 1.2rem;
+}
+
+/* Phones: the art moves to a strip along the bottom of each row. */
+
+@media (max-width: 40rem) {
+  .hero {
+    padding-block: 2.25rem 1.5rem;
+  }
+
+  .lib {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    align-items: start;
+    min-height: 0;
+  }
+
+  .body {
+    padding: 1rem 1.1rem 0.6rem;
+  }
+
+  .art {
+    grid-row: 2;
+    grid-column: 1;
+    height: 4.25rem;
+    margin: 0;
+    padding: 0 1.1rem;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%);
+    mask-image: linear-gradient(to bottom, transparent, #000 40%);
+  }
+
+  .art-labels {
+    -webkit-mask-image: linear-gradient(to right, #000 75%, transparent);
+    mask-image: linear-gradient(to right, #000 75%, transparent);
+  }
+
+  .url {
+    font-size: 0.8rem;
+  }
+
+  .md .src {
+    font-size: 0.72rem;
+  }
+
+  .md .out {
+    font-size: 0.8rem;
+  }
+
+  .md .out .h {
+    font-size: 0.95rem;
+  }
+
+  .labels {
+    font-size: 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lib {
+    transition: none;
+  }
+}
