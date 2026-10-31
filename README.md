@@ -34,6 +34,11 @@ untested so far.
 - Live search by topic: filter `libraries` in `libraries.js` by name,
   phrase, and `topics` as the visitor types, and re-render the matches.
 
+## Credits
+
+Built with [Claude Code](https://claude.com/claude-code), using Claude
+Opus 5.5.
+
 ## License
 
 Apache-2.0 OR MIT; see [COPYRIGHT](COPYRIGHT).

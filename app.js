@@ -57,8 +57,10 @@ function row(lib) {
   const title = el("h2", {}, lib.name);
   if (lib.status) title.append(" ", el("span", { class: "status" }, lib.status));
   const links = el("p", { class: "links" });
-  if (lib.site) links.append(el("a", { href: lib.site, "aria-label": `${lib.name} site` }, "Site"));
-  links.append(el("a", { href: lib.repo, "aria-label": `${lib.name} on GitHub` }, "GitHub"));
+  if (lib.site) {
+    links.append(el("a", { class: "site", href: lib.site, "aria-label": `Visit the ${lib.name} site` }, "Visit site"));
+  }
+  links.append(el("a", { class: "repo", href: lib.repo, "aria-label": `${lib.name} on GitHub` }, "GitHub"));
   body.append(title, el("p", { class: "phrase" }, lib.phrase), links);
   item.append(picture, body);
   return item;

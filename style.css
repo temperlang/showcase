@@ -10,6 +10,7 @@
   --accent: #1f5fbf;
   --focus: #1f5fbf;
   --chip: #eef1f5;
+  --on-accent: #ffffff;
   /* Art: lightness and chroma of the Chromarite band, Hrefine's parts. */
   --band-l: 86%;
   --band-c: 0.09;
@@ -32,6 +33,7 @@
     --accent: #85b2fb;
     --focus: #85b2fb;
     --chip: #202731;
+    --on-accent: #0f1217;
     --band-l: 40%;
     --band-c: 0.065;
     --scheme: #c9a0ff;
@@ -165,10 +167,29 @@ h2 {
 
 .links {
   display: flex;
+  align-items: center;
   gap: 1.1rem;
   margin: 0;
   font-size: 0.92rem;
   font-weight: 600;
+}
+
+/* The site is the main way in; the repo is a quieter second link. */
+.links .site {
+  padding: 0.35em 0.9em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+}
+
+.links .site:hover {
+  filter: brightness(1.08);
+}
+
+.links .repo {
+  color: var(--muted);
+  font-weight: 500;
 }
 
 /* Art fills the right column and fades in from the text's side. */
