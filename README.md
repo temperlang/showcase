@@ -5,7 +5,8 @@ each compiled from one source to C++, C#, Java, JavaScript, Lua, Python,
 and Rust.
 
 Plain HTML, CSS, and a little JavaScript, with no build step, no packages,
-no web fonts, and no analytics.
+and no web fonts. Visits are counted with GoatCounter
+(temper-showcase), without cookies.
 
 - `libraries.js`: the list, one entry per library (name, phrase, topics,
   links, and which picture to draw). Add a library here.
