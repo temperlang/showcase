@@ -21,11 +21,10 @@ export const libraries = [
   },
   {
     name: "Kelpto",
-    phrase: "Lossless Markdown and HTML: edit one part, and keep the rest exactly.",
-    topics: ["markdown", "html", "commonmark", "parsing", "rendering", "lossless", "editing"],
-    site: null,
+    phrase: "Lossless Markdown: edit one part, and keep every other byte.",
+    topics: ["markdown", "commonmark", "gfm", "parsing", "rendering", "lossless", "editing", "html"],
+    site: "https://temperlang.github.io/kelpto/",
     repo: "https://github.com/temperlang/kelpto",
-    status: "In progress",
     art: "markdown",
   },
   {
