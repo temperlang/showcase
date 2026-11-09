@@ -40,6 +40,17 @@ _cold_ water.</pre>
     `<ol class="labels">${["file1", "file2", "file9", "file10", "file11", "file20", "file100"]
       .map((label) => `<li>${label}</li>`)
       .join("")}</ol>`,
+
+  // One common query's concatenation, as each database is sent it.
+  sql: () =>
+    `<dl class="sql">${[
+      ["SQLite", "? || '%'"],
+      ["PostgreSQL", "CAST($1 AS TEXT) || '%'"],
+      ["MySQL", "CONCAT(%s, '%%')"],
+      ["DuckDB", "$1 || '%'"],
+    ]
+      .map(([db, text]) => `<div><dt>${db}</dt><dd>${text}</dd></div>`)
+      .join("")}</dl>`,
 };
 
 function el(tag, attrs = {}, text) {

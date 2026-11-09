@@ -212,7 +212,8 @@ h2 {
 .mono,
 .url,
 .md .src,
-.labels {
+.labels,
+.sql dd {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -359,6 +360,48 @@ h2 {
   color: var(--text);
 }
 
+/* Wherewith: one query's concatenation, as each database gets it. */
+
+.art-sql {
+  justify-content: flex-start;
+}
+
+.sql {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.sql div {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+}
+
+.sql dt {
+  width: 5.5rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.sql dd {
+  margin: 0;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--chip);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.sql div:nth-child(3) dd {
+  /* MySQL: the one that needs CONCAT. */
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  color: var(--text);
+}
+
 /* Footer */
 
 footer {
@@ -422,6 +465,24 @@ footer {
 
   .labels {
     font-size: 0.78rem;
+  }
+
+  /* Two by two, so all four fit the strip. */
+  .sql {
+    grid-template-columns: repeat(2, max-content);
+    gap: 0.25rem 0.9rem;
+    font-size: 0.68rem;
+  }
+
+  .sql div {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sql dt {
+    width: auto;
+    font-size: 0.6rem;
+    text-align: left;
   }
 }
 

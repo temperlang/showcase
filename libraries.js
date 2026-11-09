@@ -35,4 +35,12 @@ export const libraries = [
     repo: "https://github.com/temperlang/ordable",
     art: "labels",
   },
+  {
+    name: "Wherewith",
+    phrase: "Write SQL once, safely, and get each database's own version.",
+    topics: ["sql", "databases", "sqlite", "postgresql", "mysql", "mariadb", "duckdb", "injection", "query builder"],
+    site: "https://temperlang.github.io/wherewith/",
+    repo: "https://github.com/temperlang/wherewith",
+    art: "sql",
+  },
 ];
